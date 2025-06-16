@@ -1,6 +1,6 @@
 // ImageUploader component
-// This component will handle drag-and-drop and click-to-upload functionality
-// for multiple images, including thumbnail previews and upload progress indicators.
+// This component handles drag-and-drop and click-to-upload functionality
+// for multiple images with EyePop branding and blue-to-cyan gradient styling.
 
 import React, { useState, useCallback, CSSProperties } from 'react';
 
@@ -16,7 +16,7 @@ interface FilePreview extends File {
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ 
     onFilesSelected,
-    maxFiles = 5, 
+    maxFiles = 50, 
     maxFileSizeMB = 10 
 }) => {
     const [selectedFiles, setSelectedFiles] = useState<FilePreview[]>([]);
@@ -92,43 +92,41 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         }
     };
 
-    // Styles
+    // EyePop-themed styles with blue-to-cyan gradient
     const baseStyle: CSSProperties = {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '30px',
+        padding: '40px 30px',
         borderWidth: 2,
         borderRadius: '12px',
-        borderColor: '#60a5fa', // Light blue
+        borderColor: '#0ea5e9', // Sky blue
         borderStyle: 'dashed',
-        backgroundColor: '#f0f9ff', // Very light blue/sky
-        color: '#3b82f6', // Medium blue
+        backgroundColor: '#f0f9ff', // Very light sky blue
+        color: '#0369a1', // Sky blue 700
         outline: 'none',
-        transition: 'border .24s ease-in-out, background-color .24s ease-in-out',
+        transition: 'all 0.3s ease',
         cursor: 'pointer',
-        minHeight: '150px',
+        minHeight: '200px',
         justifyContent: 'center',
         textAlign: 'center',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+        boxShadow: '0 4px 12px rgba(14, 165, 233, 0.1)',
+        position: 'relative',
+        overflow: 'hidden',
     };
 
     const activeStyle: CSSProperties = {
-        borderColor: '#2563eb', // Darker blue
-        background: 'linear-gradient(135deg, #3b82f6, #10b981)', // Blue to cyan/green gradient
+        borderColor: '#0284c7', // Sky blue 600
+        background: 'linear-gradient(135deg, #0ea5e9, #06b6d4)', // Sky blue to cyan gradient
         color: '#ffffff',
-    };
-
-    const rejectStyle: CSSProperties = {
-        borderColor: '#ef4444', // Red
-        backgroundColor: '#fee2e2', // Light red
+        transform: 'scale(1.02)',
+        boxShadow: '0 8px 24px rgba(14, 165, 233, 0.2)',
     };
 
     const style = React.useMemo(() => ({
         ...baseStyle,
         ...(isDragging ? activeStyle : {}),
-        // TODO: Implement reject style based on file validation during drag
     }), [isDragging, baseStyle, activeStyle]);
 
     const thumbsContainer: CSSProperties = {
@@ -141,8 +139,8 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
     const thumb: CSSProperties = {
         display: 'inline-flex',
-        borderRadius: '8px',
-        border: '1px solid #e5e7eb', // Light gray
+        borderRadius: '12px',
+        border: '2px solid #e0f2fe', // Light cyan
         marginBottom: 8,
         marginRight: 8,
         width: 120,
@@ -151,7 +149,13 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         boxSizing: 'border-box',
         position: 'relative',
         overflow: 'hidden',
-        boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+        boxShadow: '0 4px 12px rgba(14, 165, 233, 0.1)',
+        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+    };
+
+    const thumbHover: CSSProperties = {
+        transform: 'scale(1.05)',
+        boxShadow: '0 8px 24px rgba(14, 165, 233, 0.2)',
     };
 
     const thumbInner: CSSProperties = {
@@ -160,6 +164,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: '8px',
     };
 
     const img: CSSProperties = {
@@ -167,77 +172,145 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
         width: 'auto',
         height: '100%',
         objectFit: 'cover',
+        borderRadius: '8px',
     };
 
     const removeButton: CSSProperties = {
         position: 'absolute',
-        top: '5px',
-        right: '5px',
-        background: 'rgba(0, 0, 0, 0.6)',
+        top: '8px',
+        right: '8px',
+        background: 'linear-gradient(135deg, #ef4444, #dc2626)', // Red gradient
         color: 'white',
         border: 'none',
         borderRadius: '50%',
-        width: '24px',
-        height: '24px',
+        width: '28px',
+        height: '28px',
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: '14px',
+        fontSize: '16px',
         lineHeight: '1',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+        boxShadow: '0 2px 8px rgba(239, 68, 68, 0.3)',
+        transition: 'transform 0.2s ease',
     };
     
     const errorStyle: CSSProperties = {
-        color: '#ef4444', // Red
-        marginTop: '10px',
+        color: '#dc2626', // Red 600
+        marginTop: '15px',
         fontSize: '0.9em',
+        padding: '12px',
+        backgroundColor: '#fef2f2', // Red 50
+        border: '1px solid #fecaca', // Red 200
+        borderRadius: '8px',
+        textAlign: 'center',
+    };
+
+    const uploadIconStyle: CSSProperties = {
+        fontSize: '3rem',
+        marginBottom: '16px',
+        opacity: isDragging ? 1 : 0.7,
+        transition: 'opacity 0.3s ease',
+    };
+
+    const textStyle: CSSProperties = {
+        fontSize: '1.1rem',
+        fontWeight: '600',
+        marginBottom: '8px',
+        color: isDragging ? '#ffffff' : '#0369a1',
+    };
+
+    const subtextStyle: CSSProperties = {
+        fontSize: '0.9rem',
+        opacity: isDragging ? 0.9 : 0.7,
+        color: isDragging ? '#ffffff' : '#0369a1',
     };
 
     return (
-        <section className="container" style={{ fontFamily: 'Arial, sans-serif', padding: '20px', background: '#fff', borderRadius: '12px', boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }}>
+        <section style={{ fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
             <div 
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
+                onClick={() => document.getElementById('fileInput')?.click()}
                 style={style}
             >
-                <input 
-                    type="file" 
-                    multiple 
-                    onChange={handleFileInputChange} 
-                    accept="image/*"
-                    style={{ display: 'none' }}
+                <input
                     id="fileInput"
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={handleFileInputChange}
+                    style={{ display: 'none' }}
                 />
-                <label htmlFor="fileInput" style={{cursor: 'pointer'}}>
-                    {isDragging ? (
-                        <p style={{fontSize: '1.1em', fontWeight: 'bold'}}>Drop images here!</p>
-                    ) : (
-                        <p style={{fontSize: '1.1em'}}>
-                            Drag 'n' drop some files here, or click to select files
-                            <br />
-                            <span style={{fontSize: '0.9em', color: isDragging ? '#e0f2fe' : '#9ca3af'}}>
-                                (Max {maxFiles} files, up to {maxFileSizeMB}MB each)
-                            </span>
-                        </p>
-                    )}
-                </label>
+                
+                <div style={uploadIconStyle}>
+                    📸
+                </div>
+                
+                <div style={textStyle}>
+                    {isDragging ? 'Drop your images here!' : 'Drag & drop product images'}
+                </div>
+                
+                <div style={subtextStyle}>
+                    or click to browse  • Max {maxFileSizeMB}MB each
+                </div>
+                
+                {/* Gradient overlay for active state */}
+                {isDragging && (
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(6, 182, 212, 0.1))',
+                        pointerEvents: 'none',
+                        borderRadius: '12px',
+                    }} />
+                )}
             </div>
-            {error && <p style={errorStyle}>{error}</p>}
+
+            {error && <div style={errorStyle}>{error}</div>}
+
             {selectedFiles.length > 0 && (
                 <aside style={thumbsContainer}>
-                    {selectedFiles.map(file => (
-                        <div style={thumb} key={file.name}>
+                    {selectedFiles.map((file, index) => (
+                        <div 
+                            key={file.name + index} 
+                            style={thumb}
+                            onMouseEnter={(e) => {
+                                Object.assign(e.currentTarget.style, thumbHover);
+                            }}
+                            onMouseLeave={(e) => {
+                                Object.assign(e.currentTarget.style, thumb);
+                            }}
+                        >
                             <div style={thumbInner}>
                                 <img
                                     src={file.preview}
                                     style={img}
-                                    alt={`Preview of ${file.name}`}
-                                    onLoad={() => URL.revokeObjectURL(file.preview)} // Clean up after image is loaded if it was for this specific display only, but we keep it for potential re-renders.
+                                    alt={file.name}
+                                    onLoad={() => { URL.revokeObjectURL(file.preview) }}
                                 />
                             </div>
-                            <button onClick={() => removeFile(file.name)} style={removeButton} title="Remove file">×</button>
+                            <button 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeFile(file.name);
+                                }} 
+                                style={removeButton}
+                                title="Remove image"
+                                type="button"
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = 'scale(1.1)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'scale(1)';
+                                }}
+                            >
+                                ×
+                            </button>
                         </div>
                     ))}
                 </aside>
