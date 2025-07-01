@@ -164,7 +164,7 @@ export class EyePopClient {
         return finalPrompt;
     }
 
-    // Create the correct Pop definition for visual intelligence
+    //Pop definition for visual intelligence
     private createVisualIntelligencePop(questions: string[], productType?: string, checkboxQuestions: string[] = []): PopDefinition {
         console.log(`🔧 [EyePop Client] ===== CREATING VISUAL INTELLIGENCE POP =====`);
         const comprehensivePrompt = this.buildComprehensivePrompt(questions, productType, checkboxQuestions);
@@ -185,8 +185,7 @@ export class EyePopClient {
         return popDefinition;
     }
 
-    // Enhanced parsing for visual intelligence responses
-   // In your EyePopClient class (eyepop-client.ts)
+    
 
 private parseVisualIntelligenceResponse(processedResults: any[]): Record<string, any> {
     console.log(`🔍 [EyePop Client] Starting parseVisualIntelligenceResponse with:`, {
