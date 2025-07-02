@@ -1,9 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "e0821d156556f0199cc24ec7e206246f"
-name = "eyepop-connector"
-handle = "eyepop-connector"
-application_url = "https://shopify-plugin-bice.vercel.app"
+name = "EyePop-AI-Bulk-Lister"
+handle = "eyepop-ai-bulk-lister"
+application_url = "https://eyepop-ai-bulk-lister.vercel.app"
 embedded = true
 
 [build]
@@ -31,9 +31,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://shopify-plugin-bice.vercel.app/auth/callback",
-  "https://shopify-plugin-bice.vercel.app/auth/shopify/callback",
-  "https://shopify-plugin-bice.vercel.app/api/auth/callback"
+  "https://eyepop-ai-bulk-lister.vercel.app/auth/callback",
+  "https://eyepop-ai-bulk-lister.vercel.app/auth/shopify/callback",
+  "https://eyepop-ai-bulk-lister.vercel.app/api/auth/callback"
 ]
 
 [pos]
