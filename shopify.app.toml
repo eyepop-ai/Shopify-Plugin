@@ -3,7 +3,7 @@
 client_id = "e0821d156556f0199cc24ec7e206246f"
 name = "EyePop-AI-Bulk-Lister"
 handle = "eyepop-ai-bulk-lister"
-application_url = "https://eyepop-ai-bulk-lister.vercel.app"
+application_url = "https://eyepop-ai-bulk-lister-eye-pop-s-team.vercel.app"
 embedded = true
 
 [build]
@@ -31,9 +31,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://eyepop-ai-bulk-lister.vercel.app/auth/callback",
-  "https://eyepop-ai-bulk-lister.vercel.app/auth/shopify/callback",
-  "https://eyepop-ai-bulk-lister.vercel.app/api/auth/callback"
+  "https://eyepop-ai-bulk-lister-eye-pop-s-team.vercel.app/auth/callback",
+  "https://eyepop-ai-bulk-lister-eye-pop-s-team.vercel.app/auth/shopify/callback",
+  "https://eyepop-ai-bulk-lister-eye-pop-s-team.vercel.app/api/auth/callback"
 ]
 
 [pos]
