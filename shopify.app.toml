@@ -3,7 +3,7 @@
 client_id = "e0821d156556f0199cc24ec7e206246f"
 name = "eyepop-connector"
 handle = "eyepop-connector"
-application_url = "https://heath-allocated-jam-club.trycloudflare.com"
+application_url = "https://shopify-plugin-bice.vercel.app"
 embedded = true
 
 [build]
@@ -31,9 +31,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://heath-allocated-jam-club.trycloudflare.com/auth/callback",
-  "https://heath-allocated-jam-club.trycloudflare.com/auth/shopify/callback",
-  "https://heath-allocated-jam-club.trycloudflare.com/api/auth/callback"
+  "https://shopify-plugin-bice.vercel.app/auth/callback",
+  "https://shopify-plugin-bice.vercel.app/auth/shopify/callback",
+  "https://shopify-plugin-bice.vercel.app/api/auth/callback"
 ]
 
 [pos]
